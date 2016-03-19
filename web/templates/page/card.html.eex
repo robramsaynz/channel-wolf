@@ -1,0 +1,6 @@
+<div class="jumbotron">
+  <h2>You are a werewolf</h2>
+  <hr>
+  <p>Your mission is to eat everyone in the village before they lynch you.</p>
+  <button id="start-game">lets play</button>
+</div>

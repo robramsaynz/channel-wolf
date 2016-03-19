@@ -1,7 +1,7 @@
 defmodule Werewolf.Endpoint do
   use Phoenix.Endpoint, otp_app: :werewolf
 
-  socket "/socket", Werewolf.UserSocket
+  socket "/socket", Werewolf.GameSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
