@@ -19,3 +19,22 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+
+// Now that you are connected, you can join channels with a topic:
+let channel = socket.channel("rooms:lobby", {})
+
+document.join_game = () => {
+  channel.push("join_game", {username: $('#username').val()})
+}
+
+document.start_game = () => {
+  channel.push("start_game", {})
+}
+
+channel.on("update_page", payload => {
+  $('main').html(payload.page)
+})
+
+channel.join()
+  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join", resp) })
