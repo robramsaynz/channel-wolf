@@ -3,6 +3,6 @@
   <hr>
   <p>Please select two players to make lovers.</p>
   <%= for user <- @users do  %>
-    <button id="user-<%= user %>"><%= user %></button>
+    <button id="user-<%= user.name %>"><%= user.name %></button>
   <%= end %>
 </div>

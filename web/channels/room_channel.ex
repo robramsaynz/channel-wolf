@@ -3,7 +3,7 @@ defmodule Werewolf.RoomChannel do
 
   def join("rooms:lobby", _message, socket) do
     {:ok, pid} = Werewolf.StorageServer.start_link(%{
-                    users: ["jeff", "helen", "mel", "hugh"]
+                    users: [%Player{name: "jeff"}, %Player{name: "helen"}, %Player{name: "mel"}, %Player{name: "hugh"}]
                   })
     Process.register(pid, :store)
 
@@ -14,9 +14,10 @@ defmodule Werewolf.RoomChannel do
   end
 
   def handle_in("join_game", %{"username" => username}, socket) do
-    send :store, {:prepend, :users, username}
+    user = Player.new(username)
+    send :store, {:prepend, :users, user}
 
-    {:safe, page} = Werewolf.PageView.render("card.html")
+    {:safe, page} = Werewolf.PageView.render("card.html", user: user)
     broadcast! socket, "update_page", %{page: to_string(page)}
     {:noreply, socket}
   end
