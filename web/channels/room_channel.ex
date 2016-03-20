@@ -9,9 +9,6 @@ defmodule Werewolf.RoomChannel do
   end
 
   def handle_in("join_game", %{"username" => username}, socket) do
-    Werewolf.StorageSupervisor.ensure_running
-
-IO.puts "\n\n" <> username <> "\n\n"
     {:safe, page} = Werewolf.PageView.render("card.html")
     broadcast! socket, "update_page", %{page: to_string(page)}
     {:noreply, socket}
