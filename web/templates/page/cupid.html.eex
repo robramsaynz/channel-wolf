@@ -2,8 +2,7 @@
   <h2>You are the cupid</h2>
   <hr>
   <p>Please select two players to make lovers.</p>
-  <button id="player-1-lover">player 1</button>
-  <button id="player-2-lover">player 2</button>
-  <button id="player-3-lover">player 3</button>
-  <button id="player-4-lover">player 4</button>
+  <%= for user <- @users do  %>
+    <button id="user-<%= user %>"><%= user %></button>
+  <%= end %>
 </div>
