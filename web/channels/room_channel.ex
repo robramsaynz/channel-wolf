@@ -20,7 +20,7 @@ defmodule Werewolf.RoomChannel do
     send :store, {:prepend, :users, user}
 
     {:safe, page} = Werewolf.PageView.render("card.html", user: user)
-    broadcast! socket, "update_page", %{page: to_string(page)}
+    push socket, "update_page", %{page: to_string(page)}
     {:noreply, socket}
   end
 
@@ -31,7 +31,7 @@ defmodule Werewolf.RoomChannel do
     end
 
     {:safe, page} = Werewolf.PageView.render("cupid.html", users: users)
-    broadcast! socket, "update_page", %{page: to_string(page)}
+    push socket, "update_page", %{page: to_string(page)}
     {:noreply, socket}
   end
 
