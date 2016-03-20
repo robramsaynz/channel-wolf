@@ -2,10 +2,12 @@ defmodule Werewolf.RoomChannel do
   use Phoenix.Channel
 
   def join("rooms:lobby", _message, socket) do
-    {:ok, pid} = Werewolf.StorageServer.start_link(%{
-                    users: [%Player{name: "jeff"}, %Player{name: "helen"}, %Player{name: "mel"}, %Player{name: "hugh"}]
-                  })
-    Process.register(pid, :store)
+    unless Process.whereis(:store) do
+      {:ok, pid} = Werewolf.StorageServer.start_link(%{
+                      users: []# [%Player{name: "jeff"}, %Player{name: "helen"}, %Player{name: "mel"}, %Player{name: "hugh"}]
+                    })
+      Process.register(pid, :store)
+    end
 
     {:ok, socket}
   end
