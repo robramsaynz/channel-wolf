@@ -1,6 +1,6 @@
 defmodule Werewolf.StorageServer do
-  def start_link do
-    Task.start_link(fn -> loop(%{}) end)
+  def start_link(initial_map \\ %{}) do
+    Task.start_link(fn -> loop(initial_map) end)
   end
 
   defp loop(map) do
